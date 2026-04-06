@@ -1,0 +1,283 @@
+<style>
+#nf*{box-sizing:border-box;margin:0;padding:0}
+#nf{max-width:480px;margin:0 auto;padding:1.5rem 1rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#111}
+#nf .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+#nf .logo{font-size:22px;font-weight:500}
+#nf .langs{display:flex;border:1px solid #ddd;border-radius:8px;overflow:hidden}
+#nf .langs button{padding:5px 14px;font-size:13px;font-weight:500;border:none;background:#fff;color:#888;font-family:inherit;cursor:pointer}
+#nf .langs button.on{background:#1D9E75;color:#fff}
+#nf .sub{font-size:14px;color:#666;margin-bottom:1.5rem}
+#nf .prog{display:flex;gap:6px;margin-bottom:1.5rem}
+#nf .prog span{height:4px;flex:1;border-radius:2px;background:#e5e5e5;transition:background .3s}
+#nf .prog span.on{background:#1D9E75}
+#nf .step{display:none}
+#nf .step.on{display:block}
+#nf .q{font-size:16px;font-weight:500;margin-bottom:1rem;line-height:1.4}
+#nf input[type=radio]{position:absolute;opacity:0;width:0;height:0}
+#nf .opts{display:flex;flex-direction:column;gap:8px}
+#nf label.opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:border-color .15s,background .15s}
+#nf input[type=radio]:checked+label.opt{border-color:#1D9E75;background:#E1F5EE}
+#nf input[type=radio]:checked+label.opt .dot{background:#1D9E75;border-color:#1D9E75}
+#nf input[type=radio]:checked+label.opt .dot::after{display:block}
+#nf input[type=radio]:checked+label.opt .ot{color:#0F6E56}
+#nf .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;position:relative}
+#nf .dot::after{content:'';display:none;width:8px;height:8px;border-radius:50%;background:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+#nf .ot{font-size:15px}
+#nf .field{margin-bottom:1rem}
+#nf .field label{display:block;font-size:13px;color:#666;margin-bottom:6px}
+#nf .field input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:15px;font-family:inherit;color:#111;background:#fff;outline:none}
+#nf .field input:focus{border-color:#1D9E75}
+#nf .row{display:flex;gap:8px;margin-top:1.5rem}
+#nf .row button{flex:1;padding:12px;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;border:1px solid #ddd;background:#fff;color:#111}
+#nf .row button:hover{background:#f5f5f5}
+#nf .row button.p{background:#1D9E75;border-color:#1D9E75;color:#fff}
+#nf .row button.p:hover{background:#0F6E56}
+#nf .row button:disabled{background:#eee;border-color:#eee;color:#aaa;cursor:not-allowed}
+#nf .card{background:#f9f9f9;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem}
+#nf .sr{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-bottom:1px solid #eee}
+#nf .sr:last-child{border-bottom:none}
+#nf .sk{color:#888}
+#nf .sv{color:#111;font-weight:500;text-align:right;max-width:60%}
+#nf .wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#25D366;border:none;border-radius:8px;color:#fff;font-size:16px;font-weight:500;cursor:pointer;font-family:inherit}
+#nf .wa:hover{background:#1da851}
+#nf .note{text-align:center;margin-top:10px;font-size:12px;color:#aaa}
+</style>
+
+<div id="nf">
+  <div class="top">
+    <div class="logo">Nestia</div>
+    <div class="langs">
+      <button id="nes" class="on">ES</button>
+      <button id="nen">EN</button>
+    </div>
+  </div>
+  <div class="sub" id="nsub">Encuentra tu propiedad ideal en Medellín</div>
+  <div class="prog">
+    <span id="np0"></span><span id="np1"></span><span id="np2"></span><span id="np3"></span>
+  </div>
+
+  <!-- step 0 -->
+  <div class="step on" id="ns0">
+    <div class="q" id="nq0">¿Qué estás buscando?</div>
+    <div class="opts">
+      <input type="radio" name="ntipo" id="nr0a" value="arriendo">
+      <label class="opt" for="nr0a"><div class="dot"></div><span class="ot" id="nt0a">Arriendo largo plazo</span></label>
+      <input type="radio" name="ntipo" id="nr0b" value="venta">
+      <label class="opt" for="nr0b"><div class="dot"></div><span class="ot" id="nt0b">Compra / Venta</span></label>
+    </div>
+    <div class="row"><button class="p" id="nn0" disabled>Continuar</button></div>
+  </div>
+
+  <!-- step 1 -->
+  <div class="step" id="ns1">
+    <div class="q" id="nq1">¿Cuánto es tu presupuesto mensual?</div>
+    <div class="opts">
+      <input type="radio" name="npres" id="nr1a" value="0">
+      <label class="opt" for="nr1a"><div class="dot"></div><span class="ot" id="nt1a">Menos de $1.500.000</span></label>
+      <input type="radio" name="npres" id="nr1b" value="1">
+      <label class="opt" for="nr1b"><div class="dot"></div><span class="ot" id="nt1b">$1.500.000 – $2.500.000</span></label>
+      <input type="radio" name="npres" id="nr1c" value="2">
+      <label class="opt" for="nr1c"><div class="dot"></div><span class="ot" id="nt1c">$2.500.000 – $4.000.000</span></label>
+      <input type="radio" name="npres" id="nr1d" value="3">
+      <label class="opt" for="nr1d"><div class="dot"></div><span class="ot" id="nt1d">Más de $4.000.000</span></label>
+    </div>
+    <div class="row">
+      <button id="nb1">Atrás</button>
+      <button class="p" id="nn1" disabled>Continuar</button>
+    </div>
+  </div>
+
+  <!-- step 2 -->
+  <div class="step" id="ns2">
+    <div class="q" id="nq2">¿Cuándo necesitas mudarte?</div>
+    <div class="opts" style="margin-bottom:1.2rem">
+      <input type="radio" name="nfecha" id="nr2a" value="0">
+      <label class="opt" for="nr2a"><div class="dot"></div><span class="ot" id="nt2a">Lo antes posible</span></label>
+      <input type="radio" name="nfecha" id="nr2b" value="1">
+      <label class="opt" for="nr2b"><div class="dot"></div><span class="ot" id="nt2b">En el próximo mes</span></label>
+      <input type="radio" name="nfecha" id="nr2c" value="2">
+      <label class="opt" for="nr2c"><div class="dot"></div><span class="ot" id="nt2c">En 1–3 meses</span></label>
+      <input type="radio" name="nfecha" id="nr2d" value="3">
+      <label class="opt" for="nr2d"><div class="dot"></div><span class="ot" id="nt2d">Más de 3 meses</span></label>
+    </div>
+    <div class="field">
+      <label for="nzona" id="nzl">¿En qué zona o barrio prefieres? (opcional)</label>
+      <input type="text" id="nzona" placeholder="Ej: El Poblado, Laureles, Envigado...">
+    </div>
+    <div class="row">
+      <button id="nb2">Atrás</button>
+      <button class="p" id="nn2" disabled>Continuar</button>
+    </div>
+  </div>
+
+  <!-- step 3 -->
+  <div class="step" id="ns3">
+    <div class="q" id="nq3">¿Cómo te llamamos?</div>
+    <div class="field">
+      <label for="nnombre" id="nnl">Nombre</label>
+      <input type="text" id="nnombre" placeholder="Tu nombre">
+    </div>
+    <div class="field">
+      <label for="ntelefono" id="ntll">WhatsApp</label>
+      <input type="tel" id="ntelefono" placeholder="+57 300 000 0000">
+    </div>
+    <div class="row">
+      <button id="nb3">Atrás</button>
+      <button class="p" id="nn3" disabled>Ver resumen</button>
+    </div>
+  </div>
+
+  <!-- step 4 -->
+  <div class="step" id="ns4">
+    <div class="q" id="nq4">Resumen de tu búsqueda</div>
+    <div class="card">
+      <div class="sr"><span class="sk" id="nsk0">Nombre</span><span class="sv" id="nsv0"></span></div>
+      <div class="sr"><span class="sk" id="nsk1">Buscando</span><span class="sv" id="nsv1"></span></div>
+      <div class="sr"><span class="sk" id="nsk2">Presupuesto</span><span class="sv" id="nsv2"></span></div>
+      <div class="sr"><span class="sk" id="nsk3">Mudanza</span><span class="sv" id="nsv3"></span></div>
+      <div class="sr" id="nzrow" style="display:none"><span class="sk" id="nsk4">Zona</span><span class="sv" id="nsv4"></span></div>
+      <div class="sr"><span class="sk" id="nsk5">WhatsApp</span><span class="sv" id="nsv5"></span></div>
+    </div>
+    <button class="wa" id="nwa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.553 4.103 1.523 5.83L.057 23.5l5.82-1.525A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.681-.524-5.21-1.433l-.374-.222-3.875 1.016 1.034-3.776-.244-.389A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      <span id="nwat">Enviar a WhatsApp</span>
+    </button>
+    <div class="note" id="nnote">Te responderemos en menos de 24 horas</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var lg='es';
+  var d={tipo:null,pres:null,fecha:null};
+  var bL=[['Menos de $1.500.000','Less than $1,500,000'],['$1.500.000 – $2.500.000','$1,500,000 – $2,500,000'],['$2.500.000 – $4.000.000','$2,500,000 – $4,000,000'],['Más de $4.000.000','More than $4,000,000']];
+  var fL=[['Lo antes posible','As soon as possible'],['En el próximo mes','Within the next month'],['En 1–3 meses','In 1–3 months'],['Más de 3 meses','More than 3 months']];
+  var tL={arriendo:['Arriendo largo plazo','Long-term rental'],venta:['Compra / Venta','Buy / Sell']};
+  var TX={
+    nsub:['Encuentra tu propiedad ideal en Medellín','Find your ideal property in Medellín'],
+    nq0:['¿Qué estás buscando?','What are you looking for?'],
+    nt0a:['Arriendo largo plazo','Long-term rental'],
+    nt0b:['Compra / Venta','Buy / Sell'],
+    nn0:['Continuar','Continue'],
+    nq1:['¿Cuánto es tu presupuesto mensual?','What is your monthly budget?'],
+    nt1a:['Menos de $1.500.000','Less than $1,500,000'],
+    nt1b:['$1.500.000 – $2.500.000','$1,500,000 – $2,500,000'],
+    nt1c:['$2.500.000 – $4.000.000','$2,500,000 – $4,000,000'],
+    nt1d:['Más de $4.000.000','More than $4,000,000'],
+    nb1:['Atrás','Back'],nn1:['Continuar','Continue'],
+    nq2:['¿Cuándo necesitas mudarte?','When do you need to move?'],
+    nt2a:['Lo antes posible','As soon as possible'],
+    nt2b:['En el próximo mes','Within the next month'],
+    nt2c:['En 1–3 meses','In 1–3 months'],
+    nt2d:['Más de 3 meses','More than 3 months'],
+    nzl:['¿En qué zona o barrio prefieres? (opcional)','Preferred neighborhood? (optional)'],
+    nb2:['Atrás','Back'],nn2:['Continuar','Continue'],
+    nq3:['¿Cómo te llamamos?',"What's your name?"],
+    nnl:['Nombre','Name'],ntll:['WhatsApp','WhatsApp'],
+    nb3:['Atrás','Back'],nn3:['Ver resumen','Review'],
+    nq4:['Resumen de tu búsqueda','Your search summary'],
+    nsk0:['Nombre','Name'],nsk1:['Buscando','Looking for'],
+    nsk2:['Presupuesto','Budget'],nsk3:['Mudanza','Move-in'],
+    nsk4:['Zona','Area'],nsk5:['WhatsApp','WhatsApp'],
+    nwat:['Enviar a WhatsApp','Send to WhatsApp'],
+    nnote:['Te responderemos en menos de 24 horas',"We'll get back to you within 24 hours"]
+  };
+
+  function g(id){return document.getElementById(id);}
+
+  function setLang(l){
+    lg=l;
+    var i=l==='es'?0:1;
+    g('nes').className=l==='es'?'on':'';
+    g('nen').className=l==='en'?'on':'';
+    for(var k in TX){var el=g(k);if(el)el.textContent=TX[k][i];}
+    g('nzona').placeholder=l==='es'?'Ej: El Poblado, Laureles, Envigado...':'E.g.: El Poblado, Laureles, Envigado...';
+    g('nnombre').placeholder=l==='es'?'Tu nombre':'Your name';
+  }
+
+  function goTo(n){
+    for(var i=0;i<5;i++){var s=g('ns'+i);if(s)s.className='step'+(i===n?' on':'');}
+    for(var j=0;j<4;j++){var b=g('np'+j);if(b)b.className=j<n?'on':'';}
+    if(n===4)fill();
+  }
+
+  function fill(){
+    var i=lg==='es'?0:1;
+    g('nsv0').textContent=g('nnombre').value;
+    g('nsv1').textContent=d.tipo?tL[d.tipo][i]:'';
+    g('nsv2').textContent=d.pres!==null?bL[d.pres][i]:'';
+    g('nsv3').textContent=d.fecha!==null?fL[d.fecha][i]:'';
+    g('nsv5').textContent=g('ntelefono').value;
+    var z=g('nzona').value.trim();
+    if(z){g('nsv4').textContent=z;g('nzrow').style.display='flex';}
+    else{g('nzrow').style.display='none';}
+  }
+
+  function sendWA(){
+    var nombre=g('nnombre').value,tel=g('ntelefono').value,zona=g('nzona').value.trim();
+    var i=lg==='es'?0:1;
+    var tipo=d.tipo?tL[d.tipo][i]:'',pres=d.pres!==null?bL[d.pres][i]:'',fecha=d.fecha!==null?fL[d.fecha][i]:'';
+    var msg=lg==='es'
+      ?'Hola Nestia! 👋 Me llamo *'+nombre+'* y estoy buscando una propiedad en Medellín.\n\n📋 *Detalles:*\n• Tipo: '+tipo+'\n• Presupuesto: '+pres+'\n• Mudanza: '+fecha+(zona?'\n• Zona: '+zona:'')+'\n• Mi WhatsApp: '+tel
+      :'Hi Nestia! 👋 My name is *'+nombre+"* and I'm looking for a property in Medellín.\n\n📋 *Details:*\n• Type: "+tipo+'\n• Budget: '+pres+'\n• Move-in: '+fecha+(zona?'\n• Area: '+zona:'')+'\n• My WhatsApp: '+tel;
+    window.open('https://api.whatsapp.com/send?phone=573332863157&text='+encodeURIComponent(msg),'_blank');
+  }
+
+  // Wire up everything after DOM is ready
+  document.addEventListener('DOMContentLoaded', function(){
+    g('nes').addEventListener('click',function(){setLang('es');});
+    g('nen').addEventListener('click',function(){setLang('en');});
+
+    // Radio change listeners
+    ['nr0a','nr0b'].forEach(function(id){
+      g(id).addEventListener('change',function(){d.tipo=this.value;g('nn0').disabled=false;});
+    });
+    ['nr1a','nr1b','nr1c','nr1d'].forEach(function(id,idx){
+      g(id).addEventListener('change',function(){d.pres=idx;g('nn1').disabled=false;});
+    });
+    ['nr2a','nr2b','nr2c','nr2d'].forEach(function(id,idx){
+      g(id).addEventListener('change',function(){d.fecha=idx;g('nn2').disabled=false;});
+    });
+
+    // Text input listeners
+    function chk(){g('nn3').disabled=!(g('nnombre').value.trim().length>1&&g('ntelefono').value.trim().length>6);}
+    g('nnombre').addEventListener('input',chk);
+    g('ntelefono').addEventListener('input',chk);
+
+    // Nav buttons
+    g('nn0').addEventListener('click',function(){goTo(1);});
+    g('nb1').addEventListener('click',function(){goTo(0);});
+    g('nn1').addEventListener('click',function(){goTo(2);});
+    g('nb2').addEventListener('click',function(){goTo(1);});
+    g('nn2').addEventListener('click',function(){goTo(3);});
+    g('nb3').addEventListener('click',function(){goTo(2);});
+    g('nn3').addEventListener('click',function(){goTo(4);});
+    g('nwa').addEventListener('click',sendWA);
+  });
+
+  // Fallback if DOMContentLoaded already fired
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(function(){
+      if(!g('nes')._wired){
+        g('nes')._wired=true;
+        g('nes').addEventListener('click',function(){setLang('es');});
+        g('nen').addEventListener('click',function(){setLang('en');});
+        ['nr0a','nr0b'].forEach(function(id){g(id).addEventListener('change',function(){d.tipo=this.value;g('nn0').disabled=false;});});
+        ['nr1a','nr1b','nr1c','nr1d'].forEach(function(id,idx){g(id).addEventListener('change',function(){d.pres=idx;g('nn1').disabled=false;});});
+        ['nr2a','nr2b','nr2c','nr2d'].forEach(function(id,idx){g(id).addEventListener('change',function(){d.fecha=idx;g('nn2').disabled=false;});});
+        function chk(){g('nn3').disabled=!(g('nnombre').value.trim().length>1&&g('ntelefono').value.trim().length>6);}
+        g('nnombre').addEventListener('input',chk);
+        g('ntelefono').addEventListener('input',chk);
+        g('nn0').addEventListener('click',function(){goTo(1);});
+        g('nb1').addEventListener('click',function(){goTo(0);});
+        g('nn1').addEventListener('click',function(){goTo(2);});
+        g('nb2').addEventListener('click',function(){goTo(1);});
+        g('nn2').addEventListener('click',function(){goTo(3);});
+        g('nb3').addEventListener('click',function(){goTo(2);});
+        g('nn3').addEventListener('click',function(){goTo(4);});
+        g('nwa').addEventListener('click',sendWA);
+      }
+    },0);
+  }
+})();
+</script>
